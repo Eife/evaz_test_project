@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "834176083269",
+    "project_id": "evaz-test-project-bd619",
+    "storage_bucket": "evaz-test-project-bd619.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834176083269:android:b5a696f6f041943d438a2c",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbRLp9WzU8OIYoIeAJ_WidUbLXCrXnCXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834176083269:android:fa22eb0b52e8d11c438a2c",
+        "android_client_info": {
+          "package_name": "com.example.evaz_test_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbRLp9WzU8OIYoIeAJ_WidUbLXCrXnCXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
