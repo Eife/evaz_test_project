@@ -35,57 +35,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
-    return BlocConsumer<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is FullRegisterState) {
-            controller_name.text = state.user.name ?? "";
-            controller_surname.text = state.user.surname ?? '';
-            controller_parentName.text = state.user.parentName ?? '';
-            setState(() {
-              
-            });
-          }
-        },
-        builder: (context, state) {
-        
-        
-            return Container(
-              child: Column(children: [
-                24.height,
-                Text(
-                  "Регистрация",
-                  style: TextStyle(fontSize: 24),
-                ),
-                16.height,
-                TextFormField(
-                    validator: validator,
-                    controller: controller_name,
-                    decoration: inpDecor("Имя")),
-                14.height,
-                TextFormField(
-                    validator: validator,
-                    controller: controller_surname,
-                    decoration: inpDecor("Фамилия")),
-                14.height,
-                TextFormField(
-                    validator: validator,
-                    controller: controller_parentName,
-                    decoration: inpDecor("Отчество")),
-                ElevatedButton(
-                    onPressed: () {
-                      BlocProvider.of<AuthBloc>(context).add(
-                          AnonymRegisterEvent(
-                              firstName: controller_name.text,
-                              surname: controller_surname.text,
-                              parentName: controller_parentName.text));
-                    },
-                    child: Text("Зарегистрироваться"))
-              ]).paddingOnly(left: 16, right: 16, top: 16),
-            );
-    
-        });
+    return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
+      if (state is FullRegisterState) {
+        controller_name.text = state.user.name ?? "";
+        controller_surname.text = state.user.surname ?? '';
+        controller_parentName.text = state.user.parentName ?? '';
+        setState(() {});
+      }
+    }, builder: (context, state) {
+      return Container(
+        child: Form(
+          key: _formKey,
+          child: Column(children: [
+            24.height,
+            Text(
+              "Регистрация",
+              style: TextStyle(fontSize: 24),
+            ),
+            16.height,
+            TextFormField(
+                validator: validator,
+                controller: controller_name,
+                decoration: inpDecor("Имя")),
+            14.height,
+            TextFormField(
+                validator: validator,
+                controller: controller_surname,
+                decoration: inpDecor("Фамилия")),
+            14.height,
+            TextFormField(
+                validator: validator,
+                controller: controller_parentName,
+                decoration: inpDecor("Отчество")),
+            ElevatedButton(
+                child: Text("Зарегистрироваться"),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    BlocProvider.of<AuthBloc>(context).add(AnonymRegisterEvent(
+                        firstName: controller_name.text,
+                        surname: controller_surname.text,
+                        parentName: controller_parentName.text));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Вы успешно зарегистрировались!')));
+                  }
+                  
+                })
+          ]).paddingOnly(left: 16, right: 16, top: 16),
+        ),
+      );
+    });
   }
 
   String? validator(String? text) {

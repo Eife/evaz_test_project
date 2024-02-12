@@ -13,7 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AnonymRegisterEvent>((event, emit) async {
   print("Anonim");
-  // await FirebaseAuth.instance.signOut();  
+  // await FirebaseAuth.instance.signOut(); (Если удаляется через консоль, зайти под этим же аккаунтом нет возможности!) 
   UserCredential userCredential = await FirebaseAuth.instance.signInAnonymously();
   String uid = userCredential.user!.uid;
   print("$uid");
